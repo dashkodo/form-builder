@@ -1,1 +1,1 @@
-git pull --rebasegu
+git pull --rebase
