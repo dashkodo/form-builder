@@ -1,0 +1,28 @@
+
+[Авіаційна теорія]
+---
+QuestionType=Radio required
+Gender
+Оберіть вашу стать.
+	Female
+	Male
+	Other
+---
+QuestionType=Select
+Age
+	Below 15
+	15 to 19
+	20 to 24
+	30 to 34
+	40 to 44
+	44+
+---
+QuestionType=Date
+Date of Birth
+---
+QuestionType=Checkbox
+Interests
+	Sports
+	Reading
+	Technology[free]
+	Music

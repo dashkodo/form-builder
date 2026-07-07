@@ -1,0 +1,612 @@
+string(6) "qwerty"
+string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+string(17) "+38 999 999 99 99"
+string(17) "+38 111 111 11 11"
+string(10) "2026-06-12"
+string(10) "2026-07-01"
+string(2) "є"
+string(17) "не маєт, є"
+string(6) "test23"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q1"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q2"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q3"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q4"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q5"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q6"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q7"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q8"
+array(9) {
+  ["q1"]=>
+  string(6) "qwerty"
+  ["q2"]=>
+  string(230) "Підтверджую, що надаю згоду на обробку моїх персональних даних відповідно до Закону України «Про захист персональних даних»."
+  ["q3"]=>
+  string(17) "+38 999 999 99 99"
+  ["q4"]=>
+  string(17) "+38 111 111 11 11"
+  ["q5"]=>
+  string(10) "2026-06-12"
+  ["q6"]=>
+  string(10) "2026-07-01"
+  ["q7"]=>
+  string(2) "є"
+  ["q8"]=>
+  string(17) "не маєт, є"
+  ["q9"]=>
+  string(6) "test23"
+}
+string(2) "q9"
+string(6) "ПІБ"
+string(2) "q1"
+string(66) "Згода на обробку персональних даних"
+string(2) "q2"
+string(48) "Номер мобільного телефону"
+string(2) "q3"
+string(48) "Додатковий номер телефону"
+string(2) "q4"
+string(48) "Номер мобільного телефону"
+string(2) "q5"
+string(48) "Додатковий номер телефону"
+string(2) "q6"
+string(48) "Додатковий номер телефону"
+string(2) "q7"
+string(48) "Додатковий номер телефону"
+string(2) "q8"
+string(48) "Додатковий номер телефону"
+string(2) "q9"
+string(6) "ПІБ"
+string(2) "q1"
+string(66) "Згода на обробку персональних даних"
+string(2) "q2"
+string(48) "Номер мобільного телефону"
+string(2) "q3"
+string(48) "Додатковий номер телефону"
+string(2) "q4"
+string(48) "Номер мобільного телефону"
+string(2) "q5"
+string(48) "Додатковий номер телефону"
+string(2) "q6"
+string(48) "Додатковий номер телефону"
+string(2) "q7"
+string(48) "Додатковий номер телефону"
+string(2) "q8"
+string(48) "Додатковий номер телефону"
+string(2) "q9"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q1"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q2"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q3"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q4"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q5"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q6"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q7"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q8"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q9"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q1"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q2"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q3"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q4"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q5"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q6"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q7"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q8"
+array(9) {
+  ["q1"]=>
+  string(13) "Text required"
+  ["q2"]=>
+  string(14) "Radio required"
+  ["q3"]=>
+  string(14) "Phone required"
+  ["q4"]=>
+  string(5) "Phone"
+  ["q5"]=>
+  string(13) "Date required"
+  ["q6"]=>
+  string(4) "Date"
+  ["q7"]=>
+  string(5) "Radio"
+  ["q8"]=>
+  string(8) "Checkbox"
+  ["q9"]=>
+  string(8) "Longtext"
+}
+string(2) "q9"
