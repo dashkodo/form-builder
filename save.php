@@ -84,6 +84,7 @@ class FormParser
                 $value = "'" . $value;
             }
 
+            $value = str_replace(["\r\n", "\r", "\n"], ',', $value);
             $row[] = $value;
         }
 
