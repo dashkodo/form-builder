@@ -1,3 +1,4 @@
 data.csv
 questions*.txt
 *.log
+.instatunnel.env

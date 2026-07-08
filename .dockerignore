@@ -1,0 +1,9 @@
+data.csv
+questions.txt
+.instatunnel.env
+.git
+.gitignore
+Dockerfile
+update.bat
+Start.bat
+*.log
