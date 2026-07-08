@@ -1,10 +1,16 @@
 @echo off
 setlocal
 
-for %%I in ("%CD%\data.csv") do set "DATA_CSV=%%~fI"
-for %%I in ("%CD%\questions.txt") do set "QUESTIONS_TXT=%%~fI"
-for %%I in ("%CD%\.instatunnel.env") do set "IT_ENV_FILE=%%~fI"
+for %%I in ("%~dp0.") do set "SCRIPT_DIR=%%~fI"
+for %%I in ("%SCRIPT_DIR%\data.csv") do set "DATA_CSV=%%~fI"
+for %%I in ("%SCRIPT_DIR%\questions.txt") do set "QUESTIONS_TXT=%%~fI"
+for %%I in ("%SCRIPT_DIR%\.instatunnel.env") do set "IT_ENV_FILE=%%~fI"
 for %%I in ("%TEMP%\instatunnel-subdomains.txt") do set "IT_SUBDOMAINS_FILE=%%~fI"
+
+if not exist "%DATA_CSV%" (
+	echo Creating empty %DATA_CSV%
+	type nul > "%DATA_CSV%"
+)
 
 if not exist "%IT_ENV_FILE%" (
 	echo Missing %IT_ENV_FILE%
@@ -12,14 +18,6 @@ if not exist "%IT_ENV_FILE%" (
 	pause
 	exit /b 1
 )
-
-if not exist "%DATA_CSV%" (
-	echo Creating empty %DATA_CSV%
-	type nul > "%DATA_CSV%"
-)
-
-rem docker rm -f forms-builder >nul 2>&1
-rem docker build -t forms-builder .
 
 set "RUNNING_CONTAINER_ID="
 for /f "delims=" %%I in ('docker ps -q --filter "name=^/forms-builder$"') do set "RUNNING_CONTAINER_ID=%%I"
@@ -30,7 +28,7 @@ if defined RUNNING_CONTAINER_ID (
 
 docker rm -f forms-builder >nul 2>&1
 docker pull dashkodo/forms-builder:latest
-docker run --rm --env-file "%IT_ENV_FILE%" forms-builder sh -lc "it --list --api-key \"$IT_API_KEY\" | sed -n 's/^[[:space:]]*Subdomain: //p'" > "%IT_SUBDOMAINS_FILE%"
+docker run --rm --env-file "%IT_ENV_FILE%" dashkodo/forms-builder sh -lc "it --list --api-key \"$IT_API_KEY\" | sed -n 's/^[[:space:]]*Subdomain: //p'" > "%IT_SUBDOMAINS_FILE%"
 
 set "HAS_ACTIVE_TUNNELS="
 for /f "usebackq delims=" %%S in ("%IT_SUBDOMAINS_FILE%") do set "HAS_ACTIVE_TUNNELS=1"
@@ -45,7 +43,7 @@ if defined HAS_ACTIVE_TUNNELS (
 			echo Keeping %%S
 		) else (
 			echo Deleting %%S
-			docker run --rm --env-file "%IT_ENV_FILE%" forms-builder sh -lc "it --kill \"%%S\" --api-key \"$IT_API_KEY\" || true"
+			docker run --rm --env-file "%IT_ENV_FILE%" dashkodo/forms-builder sh -lc "it --kill \"%%S\" --api-key \"$IT_API_KEY\" || true"
 		)
 	)
 ) else (
@@ -55,7 +53,7 @@ if defined HAS_ACTIVE_TUNNELS (
 del "%IT_SUBDOMAINS_FILE%" >nul 2>&1
 
 
-docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -v "%DATA_CSV%:/var/www/html/data.csv" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" forms-builder
+docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -v "%DATA_CSV%:/var/www/html/data.csv" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" dashkodo/forms-builder
 ping -n 5 127.0.0.1 >nul 2>&1
 docker logs --tail 50 forms-builder
 echo .
