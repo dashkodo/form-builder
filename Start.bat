@@ -13,9 +13,10 @@ if not exist "%IT_ENV_FILE%" (
 	exit /b 1
 )
 
-docker rm -f forms-builder >nul 2>&1
-docker build -t php8-apache-instatunnel .
-docker run --rm --env-file "%IT_ENV_FILE%" php8-apache-instatunnel sh -lc "it --list --api-key \"$IT_API_KEY\" | sed -n 's/^[[:space:]]*Subdomain: //p'" > "%IT_SUBDOMAINS_FILE%"
+rem docker rm -f forms-builder >nul 2>&1
+rem docker build -t forms-builder .
+docker pull dashkodo/forms-builder:latest
+docker run --rm --env-file "%IT_ENV_FILE%" forms-builder sh -lc "it --list --api-key \"$IT_API_KEY\" | sed -n 's/^[[:space:]]*Subdomain: //p'" > "%IT_SUBDOMAINS_FILE%"
 
 set "HAS_ACTIVE_TUNNELS="
 for /f "usebackq delims=" %%S in ("%IT_SUBDOMAINS_FILE%") do set "HAS_ACTIVE_TUNNELS=1"
@@ -30,7 +31,7 @@ if defined HAS_ACTIVE_TUNNELS (
 			echo Keeping %%S
 		) else (
 			echo Deleting %%S
-			docker run --rm --env-file "%IT_ENV_FILE%" php8-apache-instatunnel sh -lc "it --kill \"%%S\" --api-key \"$IT_API_KEY\" || true"
+			docker run --rm --env-file "%IT_ENV_FILE%" forms-builder sh -lc "it --kill \"%%S\" --api-key \"$IT_API_KEY\" || true"
 		)
 	)
 ) else (
@@ -38,7 +39,7 @@ if defined HAS_ACTIVE_TUNNELS (
 )
 
 del "%IT_SUBDOMAINS_FILE%" >nul 2>&1
-docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -v "%DATA_CSV%:/var/www/html/data.csv" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" php8-apache-instatunnel
+docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -v "%DATA_CSV%:/var/www/html/data.csv" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" forms-builder
 ping -n 5 127.0.0.1 >nul 2>&1
 docker logs --tail 50 forms-builder
 pause

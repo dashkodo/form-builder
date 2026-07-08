@@ -22,3 +22,4 @@ QuestionType=Radio required
 для запуску ->
 1) Створити .instatunnel.env файлу
 2) Запустити Start.bat
+
