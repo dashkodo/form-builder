@@ -19,16 +19,6 @@ QuestionType=Radio required
 
 Результат зберігається у data.csv
 
-
-встановлення instatunnel
-1) відкрити консоль як адмістратор
-2) winget install -e --id OpenJS.NodeJS.LTS
-3) перезапустити консоль  як адмістратор
-4) npm install -g instatunnel@latest
-5) перезапустити консоль  як адмістратор
-
-
 для запуску ->
-1) запустити USBWebServer.exe (впевнитись в налаштуваннях apache що порт 8080, якшо інший порт - змінити і перезапустити)
-2) запустити instatunnel: it 8080
-
+1) Створити .instatunnel.env файлу
+2) Запустити Start.bat
