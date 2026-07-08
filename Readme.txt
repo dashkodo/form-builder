@@ -20,6 +20,6 @@ QuestionType=Radio required
 Результат зберігається у data.csv
 
 для запуску ->
-1) Створити .instatunnel.env файлу
-2) Запустити Start.bat
-
+1) Створити .instatunnel.env файл
+2) Створити questions.txt
+3) Запустити Start.bat
