@@ -74,6 +74,8 @@ class FormBuilder
             'options' => [],
             'id' => '',
             'required' => false,
+            'file_name_from' => '',
+            'upload_dir' => '',
         ];
 
         $seenQuestion = false;
@@ -84,8 +86,26 @@ class FormBuilder
             if (preg_match('/^QuestionType=(.+)$/', $trimmed, $matches)) {
                 $parts = preg_split('/\s+/', trim($matches[1]));
                 $question['type'] = strtolower($parts[0]);
-                if (in_array('required', array_map('strtolower', $parts), true)) {
-                    $question['required'] = true;
+
+                $metaSource = trim($matches[1]);
+                if (preg_match('/filenameFrom="([^"]+)"/i', $metaSource, $metaMatches)) {
+                    $question['file_name_from'] = trim($metaMatches[1]);
+                } elseif (preg_match('/filenameFrom=([^\s]+)/i', $metaSource, $metaMatches)) {
+                    $question['file_name_from'] = trim($metaMatches[1]);
+                }
+
+                if (preg_match('/folder="([^"]+)"/i', $metaSource, $metaMatches)) {
+                    $question['upload_dir'] = trim($metaMatches[1]);
+                } elseif (preg_match('/folder=([^\s]+)/i', $metaSource, $metaMatches)) {
+                    $question['upload_dir'] = trim($metaMatches[1]);
+                }
+
+                foreach ($parts as $part) {
+                    $partLower = strtolower($part);
+                    if ($partLower === 'required') {
+                        $question['required'] = true;
+                        continue;
+                    }
                 }
                 continue;
             }
@@ -197,6 +217,21 @@ class FormBuilder
                     htmlspecialchars($question['id']),
                     htmlspecialchars($question['id']),
                     $requiredAttr
+                );
+                break;
+
+            case 'photo':
+                $html .= sprintf(
+                    '<input type="file" id="%s" name="%s" class="photo-input" accept="image/*" capture="user" data-file-name-from="%s" data-upload-dir="%s"%s/>',
+                    htmlspecialchars($question['id']),
+                    htmlspecialchars($question['id']),
+                    htmlspecialchars($question['file_name_from']),
+                    htmlspecialchars($question['upload_dir']),
+                    $requiredAttr
+                );
+                $html .= sprintf(
+                    ' <button type="button" class="btn photo-capture-trigger" data-target-input="%s">Зробити фото</button>',
+                    htmlspecialchars($question['id'])
                 );
                 break;
 

@@ -2,14 +2,26 @@
 setlocal
 
 for %%I in ("%~dp0.") do set "SCRIPT_DIR=%%~fI"
-for %%I in ("%SCRIPT_DIR%\data.csv") do set "DATA_CSV=%%~fI"
+for %%I in ("%SCRIPT_DIR%\data.csv") do set "LEGACY_DATA_CSV=%%~fI"
+for %%I in ("%SCRIPT_DIR%\storage") do set "STORAGE_DIR=%%~fI"
+for %%I in ("%STORAGE_DIR%\data.csv") do set "STORAGE_CSV=%%~fI"
 for %%I in ("%SCRIPT_DIR%\questions.txt") do set "QUESTIONS_TXT=%%~fI"
 for %%I in ("%SCRIPT_DIR%\.instatunnel.env") do set "IT_ENV_FILE=%%~fI"
 for %%I in ("%TEMP%\instatunnel-subdomains.txt") do set "IT_SUBDOMAINS_FILE=%%~fI"
 
-if not exist "%DATA_CSV%" (
-	echo Creating empty %DATA_CSV%
-	type nul > "%DATA_CSV%"
+if not exist "%STORAGE_DIR%" (
+	echo Creating storage directory %STORAGE_DIR%
+	mkdir "%STORAGE_DIR%"
+)
+
+if not exist "%STORAGE_CSV%" (
+	if exist "%LEGACY_DATA_CSV%" (
+		echo Migrating %LEGACY_DATA_CSV% to %STORAGE_CSV%
+		copy /Y "%LEGACY_DATA_CSV%" "%STORAGE_CSV%" >nul
+	) else (
+		echo Creating empty %STORAGE_CSV%
+		type nul > "%STORAGE_CSV%"
+	)
 )
 
 if not exist "%IT_ENV_FILE%" (
@@ -53,7 +65,7 @@ if defined HAS_ACTIVE_TUNNELS (
 del "%IT_SUBDOMAINS_FILE%" >nul 2>&1
 
 
-docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -v "%DATA_CSV%:/var/www/html/data.csv" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" dashkodo/forms-builder
+docker run -d --name forms-builder --env-file "%IT_ENV_FILE%" -e FORMS_STORAGE_DIR=/var/www/html/storage -v "%STORAGE_DIR%:/var/www/html/storage" -v "%QUESTIONS_TXT%:/var/www/html/questions.txt" dashkodo/forms-builder
 ping -n 5 127.0.0.1 >nul 2>&1
 docker logs --tail 50 forms-builder
 echo .

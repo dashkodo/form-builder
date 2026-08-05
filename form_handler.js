@@ -91,9 +91,12 @@ function loadFormFromStorage() {
 
       Object.entries(formData[formIndex]).forEach(([id, value]) => {
         const element = form.querySelector(`#${id}`);
+        if (!element) {
+          return;
+        }
 
         if (element.type === "checkbox" || element.type === "radio") {
-          element.checked = element.value;
+          element.checked = Boolean(value);
         } else {
           element.value = value;
         }
@@ -150,6 +153,370 @@ function showNotification(message) {
     notification.style.animation = "slideOut 0.3s ease";
     setTimeout(() => notification.remove(), 300);
   }, 3000);
+}
+
+function openPhotoCapture(fileInput) {
+  if (!fileInput) {
+    return;
+  }
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    fileInput.click();
+    return;
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "photo-capture-overlay";
+
+  const panel = document.createElement("div");
+  panel.className = "photo-capture-panel";
+
+  const video = document.createElement("video");
+  video.autoplay = true;
+  video.playsInline = true;
+
+  const previewImg = document.createElement("img");
+  previewImg.className = "photo-capture-preview";
+  previewImg.style.display = "none";
+
+  const frame = document.createElement("div");
+  frame.className = "photo-capture-frame";
+  frame.appendChild(video);
+  frame.appendChild(previewImg);
+
+  const controls = document.createElement("div");
+  controls.className = "photo-capture-controls";
+
+  const captureBtn = document.createElement("button");
+  captureBtn.type = "button";
+  captureBtn.className = "btn";
+  captureBtn.textContent = "Зробити кадр";
+
+  const useBtn = document.createElement("button");
+  useBtn.type = "button";
+  useBtn.className = "btn";
+  useBtn.textContent = "Використати фото";
+  useBtn.style.display = "none";
+
+  const retakeBtn = document.createElement("button");
+  retakeBtn.type = "button";
+  retakeBtn.className = "btn";
+  retakeBtn.textContent = "Перезняти";
+  retakeBtn.style.display = "none";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.type = "button";
+  cancelBtn.className = "btn";
+  cancelBtn.textContent = "Скасувати";
+
+  controls.appendChild(captureBtn);
+  controls.appendChild(useBtn);
+  controls.appendChild(retakeBtn);
+  controls.appendChild(cancelBtn);
+  panel.appendChild(frame);
+  panel.appendChild(controls);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+
+  let stream = null;
+  let processedFile = null;
+  let previewUrl = "";
+
+  const setMode = (mode) => {
+    const isPreview = mode === "preview";
+    if (isPreview) {
+      video.style.display = "none";
+    } else {
+      video.style.display = "block";
+    }
+    previewImg.style.display = isPreview ? "block" : "none";
+    captureBtn.style.display = isPreview ? "none" : "inline-block";
+    useBtn.style.display = isPreview ? "inline-block" : "none";
+    retakeBtn.style.display = isPreview ? "inline-block" : "none";
+  };
+
+  setMode("camera");
+
+  const closeCapture = () => {
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      stream = null;
+    }
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      previewUrl = "";
+    }
+    overlay.remove();
+  };
+
+  cancelBtn.addEventListener("click", closeCapture);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closeCapture();
+    }
+  });
+
+  captureBtn.addEventListener("click", async () => {
+    if (!video.videoWidth || !video.videoHeight) {
+      return;
+    }
+
+    captureBtn.disabled = true;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      captureBtn.disabled = false;
+      closeCapture();
+      return;
+    }
+
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const rawBlob = await new Promise((resolve) => {
+      canvas.toBlob(resolve, "image/jpeg", 0.92);
+    });
+
+    if (!rawBlob) {
+      captureBtn.disabled = false;
+      closeCapture();
+      return;
+    }
+
+    try {
+      const rawFile = new File([rawBlob], `camera_${Date.now()}.jpg`, {
+        type: "image/jpeg",
+      });
+      processedFile = await normalizePhotoFileToDocRatio(rawFile, "camera");
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+      previewUrl = URL.createObjectURL(processedFile);
+      previewImg.src = previewUrl;
+      setMode("preview");
+    } catch (e) {
+      console.error("Capture preview generation failed", e);
+      showNotification("Не вдалося обробити фото. Спробуйте ще раз.");
+    } finally {
+      captureBtn.disabled = false;
+    }
+  });
+
+  retakeBtn.addEventListener("click", () => {
+    processedFile = null;
+    setMode("camera");
+  });
+
+  useBtn.addEventListener("click", () => {
+    if (!processedFile) {
+      return;
+    }
+
+    if (typeof DataTransfer === "function") {
+      const transfer = new DataTransfer();
+      transfer.items.add(processedFile);
+      fileInput.files = transfer.files;
+      fileInput.dataset.photoAlreadyProcessed = "1";
+      fileInput.dispatchEvent(new Event("change", { bubbles: true }));
+    } else {
+      showNotification("Ваш браузер не підтримує попередній перегляд для камери. Оберіть фото файлом.");
+    }
+    closeCapture();
+  });
+
+  navigator.mediaDevices
+    .getUserMedia({
+      video: {
+        facingMode: "user",
+      },
+      audio: false,
+    })
+    .then((mediaStream) => {
+      stream = mediaStream;
+      video.srcObject = stream;
+      setMode("camera");
+    })
+    .catch(() => {
+      closeCapture();
+      showNotification("Немає доступу до камери. Оберіть фото вручну.");
+      fileInput.click();
+    });
+}
+
+function ensureSelectedPhotoPreview(fileInput) {
+  if (!fileInput || !fileInput.parentElement) {
+    return null;
+  }
+
+  let preview = fileInput.parentElement.querySelector(".photo-selected-preview");
+  if (!preview) {
+    preview = document.createElement("img");
+    preview.className = "photo-selected-preview";
+    preview.alt = "Фото попередній перегляд";
+    preview.style.display = "none";
+    fileInput.parentElement.appendChild(preview);
+  }
+  return preview;
+}
+
+function updateSelectedPhotoPreview(fileInput) {
+  const preview = ensureSelectedPhotoPreview(fileInput);
+  if (!preview) {
+    return;
+  }
+
+  if (!fileInput.files || fileInput.files.length === 0) {
+    if (preview.dataset.objectUrl) {
+      URL.revokeObjectURL(preview.dataset.objectUrl);
+      delete preview.dataset.objectUrl;
+    }
+    preview.removeAttribute("src");
+    preview.style.display = "none";
+    return;
+  }
+
+  const objectUrl = URL.createObjectURL(fileInput.files[0]);
+  if (preview.dataset.objectUrl) {
+    URL.revokeObjectURL(preview.dataset.objectUrl);
+  }
+  preview.dataset.objectUrl = objectUrl;
+  preview.src = objectUrl;
+  preview.style.display = "block";
+}
+
+function initPhotoCapture(formRoot) {
+  if (!formRoot) {
+    return;
+  }
+
+  formRoot.querySelectorAll(".photo-capture-trigger").forEach((button) => {
+    if (button.dataset.captureBound === "1") {
+      return;
+    }
+
+    button.dataset.captureBound = "1";
+    button.addEventListener("click", () => {
+      const targetInputId = button.dataset.targetInput;
+      if (!targetInputId) {
+        return;
+      }
+
+      const fileInput = document.getElementById(targetInputId);
+      openPhotoCapture(fileInput);
+    });
+  });
+}
+
+function loadImageFromBlob(blob) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(blob);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(img);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Cannot load image"));
+    };
+    img.src = objectUrl;
+  });
+}
+
+function cropImageToAspect(img, aspectWidth, aspectHeight) {
+  const srcW = img.naturalWidth || img.width;
+  const srcH = img.naturalHeight || img.height;
+  const targetRatio = aspectWidth / aspectHeight;
+  const srcRatio = srcW / srcH;
+
+  let cropW = srcW;
+  let cropH = srcH;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if (srcRatio > targetRatio) {
+    cropW = Math.floor(srcH * targetRatio);
+    offsetX = Math.floor((srcW - cropW) / 2);
+  } else if (srcRatio < targetRatio) {
+    cropH = Math.floor(srcW / targetRatio);
+    offsetY = Math.floor((srcH - cropH) / 2);
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = cropW;
+  canvas.height = cropH;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return null;
+  }
+
+  ctx.drawImage(img, offsetX, offsetY, cropW, cropH, 0, 0, cropW, cropH);
+  return canvas;
+}
+
+function canvasToFile(canvas, fileNameBase, mimeType, extension) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          reject(new Error("Cannot convert image"));
+          return;
+        }
+        resolve(
+          new File([blob], `${fileNameBase || "photo"}.${extension}`, {
+            type: mimeType,
+          }),
+        );
+      },
+      mimeType,
+      0.92,
+    );
+  });
+}
+
+async function normalizePhotoFileToDocRatio(file, fileNameBase) {
+  const img = await loadImageFromBlob(file);
+  const croppedCanvas = cropImageToAspect(img, 3, 4);
+  if (!croppedCanvas) {
+    return file;
+  }
+
+  return canvasToFile(croppedCanvas, fileNameBase, "image/jpeg", "jpg");
+}
+
+async function enforcePhotoRatioOnInput(fileInput) {
+  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+    return;
+  }
+
+  if (fileInput.dataset.photoAlreadyProcessed === "1") {
+    delete fileInput.dataset.photoAlreadyProcessed;
+    updateSelectedPhotoPreview(fileInput);
+    return;
+  }
+
+  const sourceFile = fileInput.files[0];
+  if (!sourceFile.type.startsWith("image/")) {
+    return;
+  }
+
+  try {
+    const processedFile = await normalizePhotoFileToDocRatio(
+      sourceFile,
+      sourceFile.name.replace(/\.[^.]+$/, ""),
+    );
+    if (typeof DataTransfer === "function") {
+      const transfer = new DataTransfer();
+      transfer.items.add(processedFile);
+      fileInput.files = transfer.files;
+    }
+    updateSelectedPhotoPreview(fileInput);
+  } catch (e) {
+    console.error("Photo ratio normalization failed", e);
+    updateSelectedPhotoPreview(fileInput);
+  }
 }
 
 function addToSet(set, key, value, tryAdd = false) {
@@ -290,13 +657,21 @@ function submitForm() {
       .flatMap((a) => [...a]),
   );
 
+  const payload = new FormData();
+  dynamicForm.forEach((value, key) => {
+    payload.append(key, value);
+  });
+
+  document.querySelectorAll('input[type="file"]').forEach((input) => {
+    if (input.name && input.files && input.files.length > 0) {
+      payload.append(input.name, input.files[0]);
+    }
+  });
+
   if (dynamicForm) {
     fetch("/save.php", {
       method: "POST",
-      body: JSON.stringify(Object.fromEntries(dynamicForm)),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: payload,
     }).then((response) => {
       if (response.status === 200) {
         clearFormStorage();
@@ -344,9 +719,17 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!form) return;
 
   applyPhoneMask(form);
+  initPhotoCapture(form);
 
   form.addEventListener("change", function (event) {
     const target = event.target;
+    if (target.classList && target.classList.contains("photo-input")) {
+      enforcePhotoRatioOnInput(target).then(() => {
+        saveFormToStorage();
+      });
+      return;
+    }
+
     saveFormToStorage();
 
     if (target.classList.contains("radio-input")) {

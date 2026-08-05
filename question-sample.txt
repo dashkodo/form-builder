@@ -26,3 +26,6 @@ Interests
 	Reading
 	Technology[free]
 	Music
+---
+QuestionType=Photo required filenameFrom="Gender" folder=photo
+Upload selfie for documents
