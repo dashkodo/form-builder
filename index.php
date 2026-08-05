@@ -18,7 +18,6 @@
   <body>
     <header></header>
     <div class="main">
-      <p><a href="/admin.php">Відкрити візуальний редактор / перегляд даних</a></p>
       <p class="heading">Вхідний контроль (Shark\Ram)</p>
       <p class="required">*Обов'язкове питання</p>
     </div>
