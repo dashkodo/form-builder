@@ -252,14 +252,14 @@ function getSubmissions(string $csvPath, string $storageDir): array
         throw new Exception('Неможливо відкрити data.csv');
     }
 
-    $headers = fgetcsv($handle);
+    $headers = fgetcsv($handle, 0, ',', '"', '\\');
     if (!is_array($headers)) {
         fclose($handle);
         return ['headers' => [], 'rows' => []];
     }
 
     $rows = [];
-    while (($row = fgetcsv($handle)) !== false) {
+    while (($row = fgetcsv($handle, 0, ',', '"', '\\')) !== false) {
         $assoc = [];
         foreach ($headers as $idx => $header) {
             $value = isset($row[$idx]) ? (string)$row[$idx] : '';
@@ -297,14 +297,14 @@ function readCsvData(string $csvPath): array
         throw new Exception('Неможливо відкрити data.csv');
     }
 
-    $headers = fgetcsv($handle);
+    $headers = fgetcsv($handle, 0, ',', '"', '\\');
     if (!is_array($headers)) {
         fclose($handle);
         return ['headers' => [], 'rows' => []];
     }
 
     $rows = [];
-    while (($row = fgetcsv($handle)) !== false) {
+    while (($row = fgetcsv($handle, 0, ',', '"', '\\')) !== false) {
         $assoc = [];
         foreach ($headers as $idx => $header) {
             $assoc[$header] = isset($row[$idx]) ? (string)$row[$idx] : '';

@@ -327,7 +327,7 @@ try {
             throw new Exception('Неможливо відкрити CSV-файл');
         }
 
-        $existingHeaders = fgetcsv($handle);
+        $existingHeaders = fgetcsv($handle, 0, ',', '"', '\\');
         fclose($handle);
 
         if ($existingHeaders !== $headers) {
@@ -341,8 +341,8 @@ try {
             if ($readHandle === false) {
                 throw new Exception('Неможливо прочитати CSV-файл');
             }
-            fgetcsv($readHandle);
-            while ($row = fgetcsv($readHandle)) {
+            fgetcsv($readHandle, 0, ',', '"', '\\');
+            while ($row = fgetcsv($readHandle, 0, ',', '"', '\\')) {
                 fputcsv($handle, $row);
             }
             fclose($readHandle);

@@ -42,6 +42,11 @@ filenameFrom також підтримує ключ поля (наприклад
 2) Створити questions.txt
 3) Запустити Start.bat
 
+Публікація Docker image:
+- Запустити Publish.bat
+- Опційно передати тег версії: Publish.bat 1.0.0
+- Скрипт публікує latest і (якщо задано) тег версії
+
 Візуальний редактор:
 - Відкрити /admin.php
 - Вкладка "Питання" дозволяє редагувати sections/questions і зберігати в questions.txt
