@@ -5,8 +5,10 @@ FROM php:8-apache
 RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
+    libzip-dev \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
+    && docker-php-ext-install zip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install InstaTunnel globally via npm
